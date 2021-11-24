@@ -9,8 +9,9 @@ import (
 type Task struct {
 	gorm.Model
 
-	Content string `json:"content"`
-	UserID  string `json:"user_id"`
+	Content     string `json:"content"`
+	UserID      uint   `json:"user_id"`
+	CreatedTask string `json:"created_task"`
 }
 
 func (obj *Task) Get(id uint) (*Task, error) {
@@ -21,13 +22,17 @@ func (obj *Task) Get(id uint) (*Task, error) {
 	}
 	return obj, nil
 }
-func (obj *Task) GetByUser(userID uint) ([]*Task, error) {
-	var list []*Task
-	err := db.Where("user_id = ?", userID).Find(&list).Error
-	if err != nil {
-		return nil, err
+func (obj *Task) GetByUser(userID uint, createdAt string) (int, error) {
+	var count int
+	condition := map[string]interface{}{
+		"user_id":      userID,
+		"created_task": createdAt,
 	}
-	return list, nil
+	if err := db.Model(&Task{}).Where(condition).Count(&count).Error; err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }
 
 func (obj *Task) Add() (*Task, error) {

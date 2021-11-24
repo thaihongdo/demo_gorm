@@ -43,6 +43,7 @@ func NewGormDB(db_path_str string) (*gorm.DB, func(), error) {
 func migrateTable(db *gorm.DB) error {
 	return db.AutoMigrate(
 		new(User),
+		new(Task),
 	).Error
 }
 
