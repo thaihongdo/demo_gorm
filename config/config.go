@@ -24,7 +24,6 @@ func GetConfig() *Configuration {
 
 //InitFromFile init config file
 func InitFromFile(path string) *Configuration {
-
 	if path == "" {
 		viper.AddConfigPath("config")
 		viper.SetConfigType("toml")
@@ -32,9 +31,7 @@ func InitFromFile(path string) *Configuration {
 	} else {
 		viper.SetConfigFile(path)
 	}
-
 	basePath, _ := os.Getwd()
-
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))

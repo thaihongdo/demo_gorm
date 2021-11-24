@@ -92,7 +92,7 @@ func (j *JWT) GenerateTokenShort(id uint) (TokenInfo, error) {
 		Id: id,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
-			Issuer:    "Amperfii",
+			Issuer:    "Togo",
 		},
 	}
 	token, err := j.CreateTokenShort(claims)

@@ -16,10 +16,8 @@ type LoginReq struct {
 
 func Login(c *gin.Context) {
 	appG := Gin{C: c}
-
 	var loginReq LoginReq
 	isValid := appG.BindAndValidate(&loginReq)
-
 	if isValid {
 		service := services.UserReq{Email: loginReq.Email, Password: loginReq.Password}
 		user, err := service.Login()
@@ -27,7 +25,6 @@ func Login(c *gin.Context) {
 			appG.Response(http.StatusUnauthorized, false, msg.GetMsg(msg.ERROR_AUTH_FAIL), nil, nil)
 			return
 		}
-
 		j := utils.NewJWT()
 		tokenInfo, err := j.GenerateToken(user.ID, user.Email, user.FullName)
 		if err != nil {
