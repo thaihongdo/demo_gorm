@@ -47,3 +47,13 @@ func (obj *TaskReq) Add() (bool, error) {
 	}
 	return true, nil
 }
+func (obj *TaskReq) Update() (bool, error) {
+	model := models.Task{
+		Content: obj.Content,
+	}
+	_, err := model.Update(obj.ID)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}

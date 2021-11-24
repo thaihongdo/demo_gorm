@@ -10,7 +10,8 @@ import (
 func initTaskRouter(Router *gin.RouterGroup) {
 	taskRouter := Router.Group("task").Use(utils.JWTAuth())
 	{
-		taskRouter.POST("", api.AddTask) //login
+		taskRouter.POST("", api.AddTask)
+		taskRouter.PUT("/:id", api.UpdateTask)
 	}
 
 }
