@@ -60,7 +60,7 @@ func (au *AuthenData) Test(t *testing.T) {
 	assert.Equal(t, au.expectedStatus, resp.StatusCode)
 	assert.Equal(t, au.expectedMsg, au.resp.Message)
 }
-func TestLogin(t *testing.T) {
+func LoginTest(t *testing.T) {
 
 	t.Run("PasswordNotValid", func(t *testing.T) {
 		data := &AuthenData{
@@ -86,7 +86,7 @@ func TestLogin(t *testing.T) {
 		data.Test(t)
 	})
 
-	t.Run("ValidEmail", func(t *testing.T) {
+	t.Run("AuthenSuccess", func(t *testing.T) {
 		data := &AuthenData{
 			endPoint:       "/auth/login",
 			method:         "POST",
